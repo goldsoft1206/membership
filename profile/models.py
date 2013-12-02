@@ -62,6 +62,13 @@ class EmailList(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     list_owner = models.ForeignKey(User)
 
+    def __unicode__(self):
+        return self.list_name
+
+    def get_absolute_url(self):
+        return reverse('email_detail', kwargs={'pk': self.pk})
+
+
 class UserProfile(models.Model):
     birth_date = models.DateField()
     phone = models.CharField(max_length=30)

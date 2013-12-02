@@ -70,4 +70,24 @@ class MembershipDelete(DeleteView):
     template_name = "profile/general_confirm_delete.html"
 
 
+# part of EmailList
+class EmailListView(ListView):
+    model = EmailList
+
+class EmailDetail(DetailView):
+    model = EmailList
+
+class EmailCreate(CreateView):
+    model = EmailList
+    template_name = "profile/general_create.html"
+
+class EmailUpdate(UpdateView):
+    model = EmailList
+    template_name = "profile/general_update.html"
+
+class EmailDelete(DeleteView):
+    model = EmailList
+    success_url = reverse_lazy('email_list')
+    template_name = "profile/general_confirm_delete.html"
+
 
