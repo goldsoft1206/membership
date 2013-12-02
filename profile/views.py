@@ -2,7 +2,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.core.urlresolvers import reverse_lazy
-from .models import Boat, MembershipType, Membership, EmailList, UserProfile
+from .models import Boat, MembershipType, Membership, EmailList, CustomUser
 
 
 # part of boat
@@ -88,6 +88,29 @@ class EmailUpdate(UpdateView):
 class EmailDelete(DeleteView):
     model = EmailList
     success_url = reverse_lazy('email_list')
+    template_name = "profile/general_confirm_delete.html"
+
+
+# part of User
+class UserList(ListView):
+    model = CustomUser
+
+class UserDetail(DetailView):
+    model = CustomUser
+
+class UserCreate(CreateView):
+    model = CustomUser
+    fields = ['first_name', 'last_name', 'email', 'birth_date', 'phone', 'membership', 'email_lists']
+    template_name = "profile/general_create.html"
+
+class UserUpdate(UpdateView):
+    model = CustomUser
+    fields = ['first_name', 'last_name', 'email', 'birth_date', 'phone', 'membership', 'email_lists']
+    template_name = "profile/general_update.html"
+
+class UserDelete(DeleteView):
+    model = CustomUser
+    success_url = reverse_lazy('user_list')
     template_name = "profile/general_confirm_delete.html"
 
 

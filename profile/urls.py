@@ -2,7 +2,8 @@ from django.conf.urls import patterns, include, url
 from .views import BoatList, BoatCreate, BoatDetail, BoatUpdate, BoatDelete,\
                    MembershipTypeList, MembershipTypeCreate, MembershipTypeDetail, MembershipTypeUpdate, MembershipTypeDelete,\
                    MembershipList, MembershipCreate, MembershipDetail, MembershipUpdate, MembershipDelete,\
-                   EmailListView, EmailCreate, EmailDetail, EmailUpdate, EmailDelete
+                   EmailListView, EmailCreate, EmailDetail, EmailUpdate, EmailDelete,\
+                   UserList, UserCreate, UserDetail, UserUpdate, UserDelete
 
 urlpatterns = patterns('',
     # Boat
@@ -32,4 +33,11 @@ urlpatterns = patterns('',
     url(r'^emaillist/detail/(?P<pk>\d+)/$', EmailDetail.as_view(), name='email_detail'),
     url(r'^emaillist/update/(?P<pk>\d+)/$', EmailUpdate.as_view(), name='email_update'),
     url(r'^emaillist/delete/(?P<pk>\d+)/$', EmailDelete.as_view(), name='email_delete'),
+
+    # User
+    url(r'^user/all/$', UserList.as_view(), name='user_list'),
+    url(r'^user/add/$', UserCreate.as_view(), name='user_add'),
+    url(r'^user/detail/(?P<pk>\d+)/$', UserDetail.as_view(), name='user_detail'),
+    url(r'^user/update/(?P<pk>\d+)/$', UserUpdate.as_view(), name='user_update'),
+    url(r'^user/delete/(?P<pk>\d+)/$', UserDelete.as_view(), name='user_delete'),
 )

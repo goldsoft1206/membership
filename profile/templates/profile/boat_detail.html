@@ -1,6 +1,6 @@
 <h2>Boat: {{ object.name }}</h2>
 <ul>
-    <li>type: {{ object.type }}</li>
+    <li>type: {{ object.type|default:"" }}</li>
     <li>length: {{ object.length }}</li>
     <li>beam: {{ object.beam }}</li>
     <li>draft: {{ object.draft }}</li>
