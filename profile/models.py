@@ -50,6 +50,13 @@ class Membership(models.Model):
     receive_snail_mail = models.BooleanField()
     boats = models.ManyToManyField(Boat)
 
+    def __unicode__(self):
+        return self.membership_name
+
+    def get_absolute_url(self):
+        return reverse('membership_detail', kwargs={'pk': self.pk})
+
+
 class EmailList(models.Model):
     list_name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)

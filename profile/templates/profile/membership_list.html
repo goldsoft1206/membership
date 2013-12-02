@@ -1,0 +1,15 @@
+<h2>Memberships</h2>
+<ul>
+{% for object in object_list %}
+    <li>
+        <a href="{% url 'membership_detail' pk=object.pk %}">{{ object }}</a>&nbsp;:&nbsp;
+        <a href="{% url 'membership_update' pk=object.pk %}">Edit</a>&nbsp;:&nbsp;
+        <a href="{% url 'membership_delete' pk=object.pk %}">Delete</a>
+    </li>
+{% empty %}
+    <li>No membership yet.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'membership_add' %}">Add membership</a><br/>
+<a href="{% url 'home' %}">Back Home</a>
