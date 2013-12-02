@@ -1,0 +1,15 @@
+<h2>Boats</h2>
+<ul>
+{% for boat in object_list %}
+    <li>
+        <a href="{% url 'boat_detail' pk=boat.pk %}">{{ boat.name }}</a>&nbsp;:&nbsp;
+        <a href="{% url 'boat_update' pk=boat.pk %}">Edit</a>&nbsp;:&nbsp;
+        <a href="{% url 'boat_delete' pk=boat.pk %}">Delete</a>
+    </li>
+{% empty %}
+    <li>No boats yet.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'boat_add' %}">Add boat</a><br/>
+<a href="{% url 'home' %}">Back Home</a>
