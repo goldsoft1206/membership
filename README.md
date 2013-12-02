@@ -4,8 +4,10 @@ membership
 Django 1.6 project for simple membership
 
 How to run on local
-- Clone the project from github to local
-- Install VirtualEnv and activate it
+===================
+
+- clone the project from github to local
+- install virtualenv and activate it
 - do "pip install -r requirements.txt"
 - do "python manage.py syncdb"
 - do "python manage.py runserver"
