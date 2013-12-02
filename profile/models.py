@@ -28,6 +28,13 @@ class MembershipType(models.Model):
     dues_rate = models.IntegerField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('mtype_detail', kwargs={'pk': self.pk})
+
+
 class Membership(models.Model):
     membership_name = models.CharField(max_length=30)
     address1 = models.CharField(max_length=100)

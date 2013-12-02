@@ -1,0 +1,7 @@
+<h2>Membership Type: {{ object.name }}</h2>
+<ul>
+    <li>dues_rate: {{ object.dues_rate }}</li>
+    <li>date_created: {{ object.date_created }}</li>
+</ul>
+
+<a href="{% url 'mtype_list' %}">See all Membership Types</a>
