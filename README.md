@@ -10,6 +10,7 @@ How to run on local
 - install virtualenv and activate it
 - do "pip install -r requirements.txt"
 - do "python manage.py syncdb"
+- do "python manage.py check_permissions"
 - do "python manage.py runserver"
 - visit http://127.0.0.1:8000
 
