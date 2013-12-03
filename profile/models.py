@@ -1,9 +1,5 @@
 from django.db import models
-from django.core.urlresolvers import reverse
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
-from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 class Boat(models.Model):
@@ -15,9 +11,6 @@ class Boat(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse('boat_detail', kwargs={'pk': self.pk})
 
 
 MEMBERSHIP_TYPE = (
@@ -33,9 +26,6 @@ class MembershipType(models.Model):
 
     def __unicode__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse('mtype_detail', kwargs={'pk': self.pk})
 
 
 class Membership(models.Model):
@@ -56,61 +46,24 @@ class Membership(models.Model):
     def __unicode__(self):
         return self.membership_name
 
-    def get_absolute_url(self):
-        return reverse('membership_detail', kwargs={'pk': self.pk})
-
 
 class EmailList(models.Model):
     list_name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
-    list_owner = models.ForeignKey(settings.AUTH_USER_MODEL)
+    list_owner = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.list_name
 
-    def get_absolute_url(self):
-        return reverse('email_detail', kwargs={'pk': self.pk})
 
-
-class CustomUserManager(BaseUserManager):
-
-    def _create_user(self, email, password, **extra_fields):
-        """
-        Creates and saves a User with the given username, email and password.
-        """
-        now = timezone.now()
-        email = self.normalize_email(email)
-        user = self.model(email=email,
-                          last_login=now,
-                          **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_user(self, email=None, password=None, **extra_fields):
-        return self._create_user(email, password, **extra_fields)
-
-    def create_superuser(self, email, password, **extra_fields):
-        return self._create_user(email, password, **extra_fields)
-
-
-class CustomUser(AbstractBaseUser):
-    first_name = models.CharField(_('first name'), max_length=30)
-    last_name = models.CharField(_('last name'), max_length=30)
-    email = models.EmailField(_('email address'), unique=True)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
     birth_date = models.DateField(blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
     membership = models.ForeignKey(Membership, blank=True, null=True)
     email_lists = models.ManyToManyField(EmailList, blank=True, null=True)
 
-    objects = CustomUserManager()
-
-    REQUIRED_FIELDS = []
-    USERNAME_FIELD = 'email'
-
     def __unicode__(self):
-        return self.email
+        return self.user.email
 
-    def get_absolute_url(self):
-        return reverse('user_detail', kwargs={'pk': self.pk})
 
