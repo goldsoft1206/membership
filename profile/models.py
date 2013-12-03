@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from userena.models import UserenaBaseProfile
 
 
 class Boat(models.Model):
@@ -56,8 +57,11 @@ class EmailList(models.Model):
         return self.list_name
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+class UserProfile(UserenaBaseProfile):
+    user = models.OneToOneField(User,
+                                unique=True,
+                                verbose_name='user',
+                                related_name='my_profile')
     birth_date = models.DateField(blank=True, null=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
     membership = models.ForeignKey(Membership, blank=True, null=True)

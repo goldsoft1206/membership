@@ -6,6 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name="profile/home.html"), name='home'),
-
+    url(r'^accounts/', include('userena.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

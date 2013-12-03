@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Boat, MembershipType, Membership, EmailList, UserProfile
+from .models import Boat, MembershipType, Membership, EmailList
 
 
 class BoatAdmin(admin.ModelAdmin):
@@ -17,8 +17,4 @@ admin.site.register(Membership, MembershipAdmin)
 class EmailListAdmin(admin.ModelAdmin):
     pass
 admin.site.register(EmailList, EmailListAdmin)
-
-class UserProfileAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(UserProfile, UserProfileAdmin)
 

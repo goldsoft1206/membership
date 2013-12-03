@@ -36,8 +36,19 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # django apps
+    'easy_thumbnails',
+    'guardian',
+    'userena',
+
     # self developed app
     'profile',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -83,3 +94,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+ANONYMOUS_USER_ID = -1
+AUTH_PROFILE_MODULE = 'profile.UserProfile'
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
+USERENA_SIGNIN_AFTER_SIGNUP = True
+USERENA_ACTIVATION_REQUIRED = False
+USERENA_USE_MESSAGES = False
+USERENA_WITHOUT_USERNAMES = True
+USERENA_MUGSHOT_GRAVATAR = False
